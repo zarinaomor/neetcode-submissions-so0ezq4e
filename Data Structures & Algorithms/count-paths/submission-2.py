@@ -1,0 +1,47 @@
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        # BOTTOM-UP Approach
+        prevRow = [0] * n
+
+        for r in range(m - 1, -1, -1):
+            curRow = [0] * n
+            curRow[n - 1] = 1
+
+            for c in range(n - 2, -1, -1):
+                curRow[c] = curRow[c + 1] + prevRow[c]
+            prevRow = curRow
+        return prevRow[0]
+
+       
+
+
+
+
+        # Memoization TOP-BOTTOM Approach
+        # def memoization(r, c, cache):
+        #     if r == m or c == n:
+        #         return 0
+            
+        #     if r == m - 1 and c == n - 1:
+        #         return 1
+
+        #     if cache[r][c] > 0:
+        #         return cache[r][c]
+
+        #     cache[r][c] = (memoization(r + 1, c, cache) + memoization(r, c + 1, cache))
+
+        #     return cache[r][c]
+        
+        # return memoization(0, 0, [[0] * n for i in range(m)])
+        
+        # BRUTE FORCE APPROACH
+        # def bruteForce(r, c):
+        #     if r == m or c == n:
+        #         return 0
+        #     if r == m - 1 and c == n - 1:
+        #         return 1
+            
+        #     return (bruteForce(r + 1, c) + bruteForce(r, c + 1))
+
+        # return bruteForce(0, 0)
+        
